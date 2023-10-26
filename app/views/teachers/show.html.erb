@@ -22,3 +22,13 @@
   </ul>
   <%= render 'teacher_subjects/new' %>
 </p>
+
+<p>
+  <strong>Sections:</strong>
+  <% @teacher.sections.includes(:subject, :classroom).each do |section| %>
+    <p>What: <%= section.subject.name %></p>
+    <p>Where: <%= section.classroom.name %></p>
+    <p>When: <%= section.formatted_weekdays %> - <b>From:</b> <%= section.start_time.strftime('%H:%M') %> <b>To:</b> <%= section.end_time.strftime('%H:%M') %></p>
+    <hr />
+  <% end %>
+</p>
