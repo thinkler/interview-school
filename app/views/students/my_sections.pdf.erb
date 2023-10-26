@@ -1,0 +1,14 @@
+  <h1>My Sections</h1>
+
+<% if @student.student_sections.empty? %>
+  <h3>No sections yet</h3 >
+<% end %>
+
+<% @student.sections.includes(:classroom, :subject, :teacher).each do |section| %>
+  <p><b>Subject:</b> <%= section.subject.name %></p>
+  <p><b>From:</b> <%= section.start_time.strftime('%H:%M') %> <b>To:</b> <%= section.end_time.strftime('%H:%M') %></p>
+  <p><b>Weekdays:</b> <%= section.formatted_weekdays %> </p>
+  <p><b>Teacher:</b> <%= section.teacher.first_and_last_name %></p>
+  <p><b>Classroom:</b> <%= section.classroom.name %></p>
+  <hr />
+<% end %>

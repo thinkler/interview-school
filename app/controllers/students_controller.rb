@@ -10,6 +10,12 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'my_sections', template: 'students/my_sections', locals: { student: @student }
+      end
+    end
   end
 
   # GET /students/new
