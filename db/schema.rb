@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_26_092744) do
+ActiveRecord::Schema.define(version: 2023_10_26_093556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,20 @@ ActiveRecord::Schema.define(version: 2023_10_26_092744) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "teacher_id", null: false
+    t.bigint "classroom_id", null: false
+    t.time "start_time", null: false
+    t.time "end_time", null: false
+    t.integer "weekdays", default: [0, 0, 0, 0, 0, 0, 0], null: false, array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["classroom_id"], name: "index_sections_on_classroom_id"
+    t.index ["student_id"], name: "index_sections_on_student_id"
+    t.index ["teacher_id"], name: "index_sections_on_teacher_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -53,6 +67,9 @@ ActiveRecord::Schema.define(version: 2023_10_26_092744) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "sections", "classrooms"
+  add_foreign_key "sections", "students"
+  add_foreign_key "sections", "teachers"
   add_foreign_key "teacher_subjects", "subjects"
   add_foreign_key "teacher_subjects", "teachers"
 end

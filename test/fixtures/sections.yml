@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student: one
+  teacher: one
+  classroom: one
+  start_time: 2023-10-26 11:35:56
+  end_time: 2023-10-26 11:35:56
+
+two:
+  student: two
+  teacher: two
+  classroom: two
+  start_time: 2023-10-26 11:35:56
+  end_time: 2023-10-26 11:35:56
