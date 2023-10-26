@@ -69,6 +69,8 @@ class SectionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def section_params
-      params.require(:section).permit(:subject_id, :teacher_id, :classroom_id, :start_time, :end_time)
+      params.require(:section).permit(:subject_id, :teacher_id, :classroom_id, :start_time, :end_time, :weekdays).tap do |prms|
+        prms[:weekdays] = prms[:weekdays].split(' ') if prms[:weekdays].present?
+      end
     end
 end

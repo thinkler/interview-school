@@ -7,6 +7,7 @@ class Validations::SaveSection
     end_time_later: 'End time should be later than start time',
     duration_short: "Duration can't be shorter than #{Section::MIN_DURATION} minutes",
     duration_long: "Duration can't be longer than #{Section::MAX_DURATION} minutes",
+    invalid_weekdays: 'Invalid weekdays'
   }
 
   attr_reader :section
@@ -19,11 +20,18 @@ class Validations::SaveSection
 
   # Errors could be filled with extra info like intersections time etc
   def call
-    validate_teacher_subject
-    validate_teacher_occupation
-    vadlidate_classroom_occupation
     validate_duration
     validate_time_consistency
+    validate_weekdays
+
+    if teacher
+      validate_teacher_subject
+      validate_teacher_occupation
+    end
+
+    if classroom
+      vadlidate_classroom_occupation
+    end
 
     @errors
   end
@@ -41,7 +49,7 @@ class Validations::SaveSection
     return if weekdays_intersects.empty?
 
     time_intersects = weekdays_intersects.by_time_intersection(start_time, end_time)
-    @errors << ERRORS[:teacher_occupied] if time_intersects.present?
+    @errors << ERRORS[:classroom_occupied] if time_intersects.present?
   end
 
   def validate_teacher_occupation
@@ -62,6 +70,11 @@ class Validations::SaveSection
 
   def validate_time_consistency
     @errors << ERRORS[:end_time_later] if end_time <= start_time
+  end
+
+  def validate_weekdays
+    return @errors << ERRORS[:invalid_weekdays] if weekdays.size != 7
+    return @errors << ERRORS[:invalid_weekdays] if weekdays.any? { |day| day != 0 && day != 1 }
   end
 end
 
