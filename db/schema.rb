@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2023_10_26_092744) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "classrooms", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -33,8 +36,8 @@ ActiveRecord::Schema.define(version: 2023_10_26_092744) do
   end
 
   create_table "teacher_subjects", force: :cascade do |t|
-    t.integer "teacher_id", null: false
-    t.integer "subject_id", null: false
+    t.bigint "teacher_id", null: false
+    t.bigint "subject_id", null: false
     t.integer "level", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
