@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Student</th>
+      <th>Subject</th>
       <th>Teacher</th>
       <th>Classroom</th>
       <th>Start time</th>
@@ -17,7 +17,7 @@
   <tbody>
     <% @sections.each do |section| %>
       <tr>
-        <td><%= section.student_id %></td>
+        <td><%= section.subject_id %></td>
         <td><%= section.teacher_id %></td>
         <td><%= section.classroom_id %></td>
         <td><%= section.start_time %></td>
