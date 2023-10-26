@@ -14,6 +14,7 @@ class Section < ApplicationRecord
   # In perfrect case - use validator per operation Create/Update
   validate :valdiate_save
 
+  # Model is not the best place for serializing stuff, should be somewhere in presenter/serializer
   def formatted_weekdays
     weekdays.each_with_index.map { |day, index| WEEKDAYS[index] if day == 1 }.compact.join(', ')
   end

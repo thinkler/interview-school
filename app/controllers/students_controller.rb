@@ -1,6 +1,16 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
+  def log_as
+    session[:current_student_id] = params[:id]
+    redirect_to root_path, notice: 'Logged in successfully'
+  end
+
+  def log_out
+    session[:current_student_id] = nil
+    redirect_to root_path, notice: 'Logged out successfully'
+  end
+
   # GET /students
   # GET /students.json
   def index

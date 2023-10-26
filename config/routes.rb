@@ -1,7 +1,19 @@
 Rails.application.routes.draw do
-  resources :sections
+  resources :sections do
+    resources :student_sections, only: :create, module: :sections do
+      delete :destroy, on: :collection, action: :destroy
+    end
+  end
   resources :classrooms
-  resources :students
+  resources :students do
+    member do
+      post :log_as
+    end
+
+    collection do
+      delete :log_out
+    end
+  end
   resources :teachers do
     resources :teacher_subjects, shallow: true
   end

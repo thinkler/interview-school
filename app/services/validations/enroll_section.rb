@@ -23,7 +23,7 @@ class Validations::EnrollSection
   private
 
   def validate_sections_intersection
-    weekdays_intersections = @student.sections.by_weekday_intersection(weekdays)
+    weekdays_intersections = @student.sections.where.not(id: section).by_weekday_intersection(weekdays)
     return if weekdays_intersections.empty?
 
     time_intersections = weekdays_intersections.by_time_intersection(start_time, end_time)

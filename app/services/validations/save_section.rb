@@ -1,6 +1,4 @@
 class Validations::SaveSection
-  include SectionsUtils
-
   # Could be part of i8n file
   ERRORS = {
     unrelated_subject: 'Teacher is not related to subject',

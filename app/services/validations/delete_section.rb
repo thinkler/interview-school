@@ -1,3 +1,4 @@
+# Not implemented
 class Validations::DeleteSection
   # Could be part of i8n file
   ERRORS = {
@@ -12,7 +13,6 @@ class Validations::DeleteSection
     @errors = []
   end
 
-  # Errors could be filled with extra info like intersections time etc
   def call
     # - Today is not a previous day of the next section week day Validation
 
